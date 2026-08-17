@@ -130,12 +130,35 @@
   /* ---------- contact form ---------- */
   const contactForm = document.getElementById("contactForm");
   const formSuccess = document.getElementById("formSuccess");
+  const formError = document.getElementById("formError");
 
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      contactForm.hidden = true;
-      formSuccess.hidden = false;
+      formError.hidden = true;
+      const submitBtn = contactForm.querySelector("button[type=submit]");
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(contactForm),
+        });
+        const data = await res.json();
+        if (data.success) {
+          contactForm.hidden = true;
+          formSuccess.hidden = false;
+        } else {
+          throw new Error(data.message || "Submission failed");
+        }
+      } catch (err) {
+        formError.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
     });
   }
 })();

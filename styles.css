@@ -432,6 +432,7 @@ img, video { display: block; max-width: 100%; }
 /* ---------- contact form ---------- */
 .contact-lede { font-size: 14px; color: color-mix(in srgb, var(--color-text) 65%, transparent); margin: 0 0 40px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.form-grid[hidden] { display: none; }
 .field { display: flex; flex-direction: column; }
 .field label { display: block; font-size: 12px; margin-bottom: 5px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
 .field-full { grid-column: 1 / -1; }
@@ -448,6 +449,8 @@ select.input { appearance: none; }
 .form-success { border: 2px solid var(--color-divider); padding: 48px; text-align: center; }
 .form-success .title { font-family: var(--font-heading); font-weight: 800; font-size: 20px; margin-bottom: 8px; }
 .form-success p { font-size: 14px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.form-error { border: 2px solid var(--color-accent-700); background: color-mix(in srgb, var(--color-accent) 10%, transparent); padding: 16px 20px; margin-bottom: 24px; }
+.form-error p { font-size: 14px; margin: 0; }
 
 /* ---------- footer ---------- */
 .footer {

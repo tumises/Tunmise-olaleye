@@ -560,14 +560,22 @@
       <p>We'll be in touch within one business day.</p>
     </div>
 
+    <div class="form-error" id="formError" hidden>
+      <p>Something went wrong sending that — please try again, or email directly.</p>
+    </div>
+
     <form class="form-grid" id="contactForm">
-      <div class="field"><label for="f-name">Name</label><input class="input" id="f-name" required></div>
-      <div class="field"><label for="f-email">Email</label><input class="input" id="f-email" type="email" required></div>
-      <div class="field"><label for="f-company">Company / Channel</label><input class="input" id="f-company"></div>
-      <div class="field"><label for="f-url">YouTube Channel URL</label><input class="input" id="f-url" type="url"></div>
+      <input type="hidden" name="access_key" value="8f2d84bc-8950-49bb-b785-5cf82fdfefdb">
+      <input type="hidden" name="subject" value="New project inquiry — Tunmise Olaleye site">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="field"><label for="f-name">Name</label><input class="input" id="f-name" name="Name" required></div>
+      <div class="field"><label for="f-email">Email</label><input class="input" id="f-email" name="Email" type="email" required></div>
+      <div class="field"><label for="f-company">Company / Channel</label><input class="input" id="f-company" name="Company / Channel"></div>
+      <div class="field"><label for="f-url">YouTube Channel URL</label><input class="input" id="f-url" name="YouTube Channel URL" type="url"></div>
       <div class="field">
         <label for="f-service">Service interested in</label>
-        <select class="input" id="f-service">
+        <select class="input" id="f-service" name="Service interested in">
           <option>Website Design</option>
           <option>YouTube Promotion</option>
           <option>Both</option>
@@ -576,24 +584,24 @@
       </div>
       <div class="field">
         <label for="f-output">Current monthly video output</label>
-        <select class="input" id="f-output">
+        <select class="input" id="f-output" name="Current monthly video output">
           <option>0 — just starting</option>
           <option>1–4 videos</option>
           <option>5–10 videos</option>
           <option>10+ videos</option>
         </select>
       </div>
-      <div class="field"><label for="f-goal">Primary goal</label><input class="input" id="f-goal" placeholder="e.g. consistent growth, better retention"></div>
+      <div class="field"><label for="f-goal">Primary goal</label><input class="input" id="f-goal" name="Primary goal" placeholder="e.g. consistent growth, better retention"></div>
       <div class="field">
         <label for="f-budget">Approximate budget</label>
-        <select class="input" id="f-budget">
+        <select class="input" id="f-budget" name="Approximate budget">
           <option>Under $1,000 / mo</option>
           <option>$1,000–$3,000 / mo</option>
           <option>$3,000–$8,000 / mo</option>
           <option>$8,000+ / mo</option>
         </select>
       </div>
-      <div class="field field-full"><label for="f-details">Project details</label><textarea class="input" id="f-details" rows="4"></textarea></div>
+      <div class="field field-full"><label for="f-details">Project details</label><textarea class="input" id="f-details" name="Project details" rows="4"></textarea></div>
       <button type="submit" class="btn btn-primary btn-block field-full">Submit Inquiry</button>
     </form>
   </div>
