@@ -3,7 +3,7 @@
 
   /* ---------- theme toggle ---------- */
   const THEME_KEY = "tunmise-theme";
-  const themeButtons = document.querySelectorAll(".theme-toggle-opt");
+  const themeButtons = document.querySelectorAll(".theme-toggle-opt[data-theme-value]");
 
   function applyTheme(theme) {
     if (theme === "black") document.documentElement.setAttribute("data-theme", "black");
@@ -23,6 +23,28 @@
 
   applyTheme(localStorage.getItem(THEME_KEY) || "red");
 
+  /* ---------- light/dark mode ---------- */
+  const MODE_KEY = "tunmise-mode";
+  const modeButtons = document.querySelectorAll(".mode-toggle-opt[data-mode-value]");
+
+  function applyMode(mode) {
+    if (mode === "light") document.documentElement.setAttribute("data-mode", "light");
+    else document.documentElement.removeAttribute("data-mode");
+    modeButtons.forEach((btn) => {
+      btn.classList.toggle("is-active", btn.dataset.modeValue === mode);
+    });
+  }
+
+  modeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mode = btn.dataset.modeValue;
+      localStorage.setItem(MODE_KEY, mode);
+      applyMode(mode);
+    });
+  });
+
+  applyMode(localStorage.getItem(MODE_KEY) || "dark");
+
   /* ---------- mobile nav ---------- */
   const navToggle = document.getElementById("navToggle");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -39,7 +61,7 @@
   mobileMenu.querySelectorAll("a").forEach((a) => {
     a.addEventListener("click", () => setNavOpen(false));
   });
-  window.matchMedia("(min-width:1181px)").addEventListener("change", (e) => {
+  window.matchMedia("(min-width:1401px)").addEventListener("change", (e) => {
     if (e.matches) setNavOpen(false);
   });
 
@@ -142,10 +164,15 @@
       submitBtn.textContent = "Sending...";
 
       try {
+        const formData = new FormData(contactForm);
+        const payload = Object.fromEntries(formData.entries());
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
-          headers: { Accept: "application/json" },
-          body: new FormData(contactForm),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
         });
         const data = await res.json();
         if (data.success) {
