@@ -155,6 +155,13 @@
           throw new Error(data.message || "Submission failed");
         }
       } catch (err) {
+        console.error("Contact form submission failed:", err);
+        const msgEl = formError.querySelector("p");
+        if (msgEl) {
+          msgEl.textContent = err && err.message
+            ? `Something went wrong sending that: ${err.message}`
+            : "Something went wrong sending that — please try again, or email directly.";
+        }
         formError.hidden = false;
         submitBtn.disabled = false;
         submitBtn.textContent = originalLabel;
